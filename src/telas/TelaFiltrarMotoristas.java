@@ -40,46 +40,46 @@ public class TelaFiltrarMotoristas extends JFrame implements TelasInterface, Act
         if(motoristasDisponiveis.isEmpty()){
             JOptionPane.showMessageDialog(null, "Não há nenhum motorista disponível neste horário, retornando à tela de opções.");
             new TelaMotoristas(usuario).tela();
+        } else {
+            comboBoxMotoristas = new JComboBox<>();
+
+            for (Motorista m : motoristasDisponiveis) {
+                comboBoxMotoristas.addItem(m.getNome()); //assim, teremos uma comboBox com os nomes dos nossos motoristas filtrados
+            }
+
+            this.setTitle("Motoristas Disponíveis");
+            this.setSize(400, 200);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setLayout(new GridBagLayout());
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(10, 10, 10, 10);
+            gbc.gridwidth = 2;
+
+            JLabel label = new JLabel("Selecione um motorista:");
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            this.add(label, gbc);
+
+            gbc.gridy = 1;
+            gbc.gridwidth = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            this.add(comboBoxMotoristas, gbc);
+
+            botaoVisualizarPerfil = new JButton("Visualizar Perfil");
+            botaoVisualizarPerfil.addActionListener(this);
+
+            gbc.gridy = 2;
+            gbc.gridx = 0;
+            gbc.gridwidth = 2;
+            gbc.fill = GridBagConstraints.NONE;
+
+            this.add(botaoVisualizarPerfil, gbc);
+
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
         }
-
-        comboBoxMotoristas = new JComboBox<>();
-
-        for(Motorista m : motoristasDisponiveis){
-            comboBoxMotoristas.addItem(m.getNome()); //assim, teremos uma comboBox com os nomes dos nossos motoristas filtrados
-        }
-
-        this.setTitle("Motoristas Disponíveis");
-        this.setSize(400, 200);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new GridBagLayout());
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridwidth = 2;
-
-        JLabel label = new JLabel("Selecione um motorista:");
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        this.add(label, gbc);
-
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.add(comboBoxMotoristas, gbc);
-
-        botaoVisualizarPerfil = new JButton("Visualizar Perfil");
-        botaoVisualizarPerfil.addActionListener(this);
-
-        gbc.gridy = 2;
-        gbc.gridx = 0;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.NONE;
-
-        this.add(botaoVisualizarPerfil, gbc);
-
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
 
     }
 
@@ -90,6 +90,7 @@ public class TelaFiltrarMotoristas extends JFrame implements TelasInterface, Act
             int indiceSelecionado = comboBoxMotoristas.getSelectedIndex();
             motoristaSelecionado = motoristasDisponiveis.get(indiceSelecionado);
             mostrarPerfilMotorista(motoristaSelecionado);
+
         }
 
         if (e.getSource() == botaoVoltar) {
@@ -98,7 +99,12 @@ public class TelaFiltrarMotoristas extends JFrame implements TelasInterface, Act
         }
 
         if (e.getSource() == botaoContratar){
+            framePerfil.dispose();
+            JOptionPane.showMessageDialog(null, "Motorista " + motoristaSelecionado.getNome() + " contratado, enviar mensagem para o número "
+                    + motoristaSelecionado.getNumeroTelefone() +" para agendamento de horários e tirar dúvidas. Obrigado pela preferência! ");
+            usuario.adicionarMotorista(motoristaSelecionado);
 
+            new TelaAposContratar(usuario).tela();
         }
     }
 
