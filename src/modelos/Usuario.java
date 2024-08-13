@@ -46,6 +46,10 @@ public class Usuario {
         this.cpf = cpf;
     }
 
+    public void adicionarMotorista(Motorista motorista){
+        listaMotoristas.add(motorista);
+    }
+
     public List<Motorista> getListaMotoristas() {
         return listaMotoristas;
     }
