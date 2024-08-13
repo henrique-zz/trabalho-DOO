@@ -37,7 +37,7 @@ public class TelaAposContratar extends JFrame implements TelasInterface, ActionL
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
 
-
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
