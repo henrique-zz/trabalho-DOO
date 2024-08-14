@@ -87,9 +87,13 @@ public class TelaTodosMotoristas extends JFrame implements TelasInterface, Actio
 
         if (e.getSource() == botaoContratar){
             framePerfil.dispose();
-            JOptionPane.showMessageDialog(null, "Motorista " + motoristaSelecionado.getNome() + " contratado, enviar mensagem para o número "
-                    + motoristaSelecionado.getNumeroTelefone() +" para agendamento de horários e tirar dúvidas. Obrigado pela preferência! ");
-            usuario.adicionarMotorista(motoristaSelecionado);
+            if(!usuario.getListaMotoristas().contains(motoristaSelecionado)) {
+                JOptionPane.showMessageDialog(null, "Motorista " + motoristaSelecionado.getNome() + " contratado, enviar mensagem para o número "
+                        + motoristaSelecionado.getNumeroTelefone() + " para agendamento de horários e tirar dúvidas. Obrigado pela preferência! ");
+                usuario.adicionarMotorista(motoristaSelecionado);
+            } else {
+                JOptionPane.showMessageDialog(null, "O motorista " + motoristaSelecionado.getNome() + " já foi contratado.");
+            }
 
             new TelaAposContratar(usuario).tela();
         }

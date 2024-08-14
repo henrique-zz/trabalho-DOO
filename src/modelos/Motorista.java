@@ -5,6 +5,7 @@ import metodos.HorariosMotorista;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
+import java.util.Objects;
 
 public class Motorista {
     private String nome;
@@ -22,6 +23,19 @@ public class Motorista {
     public String tempoNoAplicativo(){
         Period periodo = Period.between(dataCadastro,LocalDate.now()); //verifica o tempo entre a data de cadastro inserida e o tempo atual
         return periodo.getYears() + " anos e " + periodo.getMonths() + " meses";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Motorista motorista = (Motorista) o;
+        return Objects.equals(getNome(), motorista.getNome()) && Objects.equals(getNumeroTelefone(), motorista.getNumeroTelefone()) && Objects.equals(getDataCadastro(), motorista.getDataCadastro());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNome(), getNumeroTelefone(), getDataCadastro());
     }
 
     public String getNome() {

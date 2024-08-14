@@ -14,7 +14,7 @@ public class TelaAposContratar extends JFrame implements TelasInterface, ActionL
     private Usuario usuario;
     private String nome, cpf, email, telefone;
     private List<Motorista> motoristas;
-    private JButton botaoContratar, botaoVoltar, botaoVisualizarPerfil;
+    private JButton botaoContratarMaisMotoristas, botaoVoltarInicio, botaoVisualizarMotoristasContratados;
 
 
     public TelaAposContratar(Usuario usuario){
@@ -30,12 +30,31 @@ public class TelaAposContratar extends JFrame implements TelasInterface, ActionL
     public void tela() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Motorista Contratado");
-        this.setSize(400,400);
+        this.setSize(290,330);
         this.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
+
+        JLabel label = new JLabel("Selecione a Opção Desejada");
+        gbc.gridy = 0;
+        this.add(label, gbc);
+
+        botaoContratarMaisMotoristas = new JButton("Contratar Outros Motoristas");
+        botaoContratarMaisMotoristas.addActionListener(this);
+        gbc.gridy = 1;
+        this.add(botaoContratarMaisMotoristas, gbc);
+
+        botaoVisualizarMotoristasContratados = new JButton("Visualizar Motoristas Contratados");
+        botaoVisualizarMotoristasContratados.addActionListener(this);
+        gbc.gridy = 2;
+        this.add(botaoVisualizarMotoristasContratados, gbc);
+
+        botaoVoltarInicio = new JButton("Voltar à Tela Inicial");
+        botaoVoltarInicio.addActionListener(this);
+        gbc.gridy = 3;
+        this.add(botaoVoltarInicio, gbc);
 
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -43,6 +62,18 @@ public class TelaAposContratar extends JFrame implements TelasInterface, ActionL
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == botaoContratarMaisMotoristas){
+            this.dispose();
+            new TelaMotoristas(usuario).tela();
+        }
 
+        if(e.getSource() == botaoVisualizarMotoristasContratados){
+
+        }
+
+        if(e.getSource() == botaoVoltarInicio){
+            this.dispose();
+            new TelaInicialPrograma(usuario).tela();
+        }
     }
 }
