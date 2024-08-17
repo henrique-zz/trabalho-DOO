@@ -35,12 +35,6 @@ public class TelaCadastro extends JFrame implements ActionListener, TelasInterfa
         JPanel panel = new JPanel();
         panel.setBackground(Color.BLACK);
 
-        JLabel label = new JLabel("NOME APLICATIVO");
-        label.setForeground(Color.WHITE);
-        label.setHorizontalTextPosition(JLabel.CENTER);
-        label.setVerticalAlignment(JLabel.BOTTOM);
-        label.setFont(new Font("MV Boli", Font.BOLD, 18));
-
         nomeField = new JTextField();
 
         cpfField = new JTextField();
@@ -72,7 +66,6 @@ public class TelaCadastro extends JFrame implements ActionListener, TelasInterfa
         panel2.add(buttonPanel);
 
         panel.add(panel2);
-        panel.add(label);
 
         return panel;
     }
