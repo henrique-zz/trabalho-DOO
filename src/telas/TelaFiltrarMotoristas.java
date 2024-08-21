@@ -101,7 +101,7 @@ public class TelaFiltrarMotoristas extends JFrame implements TelasInterface, Act
         if (e.getSource() == botaoContratar){
             framePerfil.dispose();
             JOptionPane.showMessageDialog(null, "Motorista " + motoristaSelecionado.getNome() + " contratado, enviar mensagem para o número "
-                    + motoristaSelecionado.getNumeroTelefone() +" para agendamento de horários e tirar dúvidas. Obrigado pela preferência! ");
+                    + motoristaSelecionado.getNumeroTelefone() +" para acertar a forma de pagamento e tirar dúvidas. Obrigado pela preferência! ");
             usuario.adicionarMotorista(motoristaSelecionado);
 
             new TelaAposContratar(usuario).tela();
